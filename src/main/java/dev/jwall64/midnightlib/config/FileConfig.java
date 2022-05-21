@@ -88,7 +88,11 @@ public class FileConfig {
         if(!directory.isDirectory()) return null;
 
         FileConfig out = findFile(directory.listFiles(), prefix);
-        if(out != null) return out;
+        if(out != null) {
+            out.getRoot().fill(defaults);
+            out.save();
+            return out;
+        }
 
         ConfigProvider provider = ConfigRegistry.INSTANCE.getDefaultProvider();
         if(provider == null) return null;

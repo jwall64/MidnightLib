@@ -181,7 +181,7 @@ public class Registry<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
 
             private int index = 0;
 

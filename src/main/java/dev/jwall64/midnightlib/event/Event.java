@@ -49,4 +49,13 @@ public class Event {
         }
     }
 
+    protected void cancel() {
+
+        HandlerList<?> handlers = events.get(getClass());
+        if(handlers == null) return;
+
+        handlers.cancel();
+
+    }
+
 }
