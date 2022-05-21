@@ -1,12 +1,19 @@
 package dev.jwall64.midnightlib.config;
 
-import dev.jwall64.midnightlib.config.json.JsonConfigProvider;
+import dev.jwall64.midnightlib.config.serialization.json.JsonConfigProvider;
+import dev.jwall64.midnightlib.config.serialization.ConfigSerializer;
+import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
+import dev.jwall64.midnightlib.math.Color;
+import dev.jwall64.midnightlib.math.Region;
+import dev.jwall64.midnightlib.math.Vec3d;
+import dev.jwall64.midnightlib.math.Vec3i;
 import dev.jwall64.midnightlib.registry.Identifier;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class ConfigRegistry {
 
@@ -45,7 +52,7 @@ public class ConfigRegistry {
     @SuppressWarnings("unchecked")
     public <T> ConfigSerializer<T> getSerializer(Class<T> clazz) {
         for(Class<?> ser : serializers.keySet()) {
-            if(ser == clazz || ser.isAssignableFrom(clazz)) return (ConfigSerializer<T>) serializers.get(ser);
+            if(ser == clazz || clazz.isAssignableFrom(ser)) return (ConfigSerializer<T>) serializers.get(ser);
         }
 
         return null;
@@ -54,7 +61,7 @@ public class ConfigRegistry {
     @SuppressWarnings("unchecked")
     public <T> InlineSerializer<T> getInlineSerializer(Class<T> clazz) {
         for(Class<?> ser : inlineSerializers.keySet()) {
-            if(ser == clazz || ser.isAssignableFrom(clazz)) return (InlineSerializer<T>) inlineSerializers.get(ser);
+            if(ser == clazz || clazz.isAssignableFrom(ser)) return (InlineSerializer<T>) inlineSerializers.get(ser);
         }
 
         return null;
@@ -63,7 +70,7 @@ public class ConfigRegistry {
     public boolean canSerialize(Class<?> clazz) {
 
         for(Class<?> ser : serializers.keySet()) {
-            if(ser == clazz || ser.isAssignableFrom(clazz)) return true;
+            if(ser == clazz || clazz.isAssignableFrom(ser)) return true;
         }
 
         return false;
@@ -71,7 +78,7 @@ public class ConfigRegistry {
 
     public boolean canSerializeInline(Class<?> clazz) {
         for(Class<?> ser : inlineSerializers.keySet()) {
-            if(ser == clazz || ser.isAssignableFrom(clazz)) return true;
+            if(ser == clazz || clazz.isAssignableFrom(ser)) return true;
         }
 
         return false;
@@ -107,10 +114,28 @@ public class ConfigRegistry {
 
     }
 
-    public void setupDefaults() {
+    public static final InlineSerializer<UUID> UUID_SERIALIZER = new InlineSerializer<UUID>() {
+        @Override
+        public UUID deserialize(String string) {
+            return UUID.fromString(string);
+        }
 
-        setDefaultProvider(JsonConfigProvider.INSTANCE);
-        registerInlineSerializer(Identifier.class, Identifier.SERIALIZER);
+        @Override
+        public String serialize(UUID object) {
+            return object.toString();
+        }
+    };
+
+    public void setupDefaults(String defaultNamespace) {
+
+        setDefaultProvider(registerProvider(JsonConfigProvider.INSTANCE));
+
+        registerInlineSerializer(Identifier.class, new Identifier.Serializer(defaultNamespace));
+        registerInlineSerializer(Vec3d.class, Vec3d.SERIALIZER);
+        registerInlineSerializer(Vec3i.class, Vec3i.SERIALIZER);
+        registerInlineSerializer(Region.class, Region.SERIALIZER);
+        registerInlineSerializer(Color.class, Color.SERIALIZER);
+        registerInlineSerializer(UUID.class, UUID_SERIALIZER);
 
     }
 

@@ -1,4 +1,4 @@
-package dev.jwall64.midnightlib.config.json;
+package dev.jwall64.midnightlib.config.serialization.json;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
