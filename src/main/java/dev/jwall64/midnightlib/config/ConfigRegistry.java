@@ -3,10 +3,7 @@ package dev.jwall64.midnightlib.config;
 import dev.jwall64.midnightlib.config.serialization.json.JsonConfigProvider;
 import dev.jwall64.midnightlib.config.serialization.ConfigSerializer;
 import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
-import dev.jwall64.midnightlib.math.Color;
-import dev.jwall64.midnightlib.math.Region;
-import dev.jwall64.midnightlib.math.Vec3d;
-import dev.jwall64.midnightlib.math.Vec3i;
+import dev.jwall64.midnightlib.math.*;
 import dev.jwall64.midnightlib.registry.Identifier;
 
 import java.io.File;
@@ -133,6 +130,8 @@ public class ConfigRegistry {
         registerInlineSerializer(Identifier.class, new Identifier.Serializer(defaultNamespace));
         registerInlineSerializer(Vec3d.class, Vec3d.SERIALIZER);
         registerInlineSerializer(Vec3i.class, Vec3i.SERIALIZER);
+        registerInlineSerializer(Vec2d.class, Vec2d.SERIALIZER);
+        registerInlineSerializer(Vec2i.class, Vec2i.SERIALIZER);
         registerInlineSerializer(Region.class, Region.SERIALIZER);
         registerInlineSerializer(Color.class, Color.SERIALIZER);
         registerInlineSerializer(UUID.class, UUID_SERIALIZER);
