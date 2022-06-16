@@ -2,10 +2,11 @@ package dev.jwall64.midnightlib.registry;
 
 import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
 
+@SuppressWarnings("unused")
 public class Identifier {
 
 
-    private static final IllegalArgumentException EXCEPTION = new IllegalArgumentException("Unable to parse MIdentifier!");
+    private static final IllegalArgumentException EXCEPTION = new IllegalArgumentException("Unable to parse Identifier!");
 
     private final String namespace;
     private final String path;
@@ -105,6 +106,6 @@ public class Identifier {
         public boolean canDeserialize(String s) {
             return s.length() > 0 && (!s.contains(":") || isValid(s.split(":")));
         }
-    };
+    }
 
 }
