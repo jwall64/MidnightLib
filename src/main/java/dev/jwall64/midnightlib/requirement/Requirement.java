@@ -2,9 +2,12 @@ package dev.jwall64.midnightlib.requirement;
 
 import dev.jwall64.midnightlib.config.ConfigSection;
 import dev.jwall64.midnightlib.config.serialization.ConfigSerializer;
+import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
 import dev.jwall64.midnightlib.registry.Identifier;
 import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.midnightlib.registry.RegistryBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Requirement<T> {
@@ -31,25 +34,30 @@ public class Requirement<T> {
 
     public static class RequirementSerializer<T> implements ConfigSerializer<Requirement<T>> {
 
-        private final Registry<RequirementType<T>> registry;
+        private final RegistryBase<?, RequirementType<T>> registry;
 
-        public RequirementSerializer(Registry<RequirementType<T>> registry) {
+        public RequirementSerializer(RegistryBase<?, RequirementType<T>> registry) {
             this.registry = registry;
         }
 
-        @SuppressWarnings("unchecked")
         @Override
         public Requirement<T> deserialize(ConfigSection section) {
 
             if(section.has("values", List.class)) {
 
                 boolean any = section.has("any", Boolean.class) && section.getBoolean("any");
-                return new MultiRequirement<T>(any, section.getListFiltered("values", (Class<Requirement<T>>) ((Class<?>)Requirement.class)));
+
+                List<Requirement<T>> reqs = new ArrayList<>();
+                for(ConfigSection sec : section.getListFiltered("values", ConfigSection.class)) {
+                    reqs.add(deserialize(sec));
+                }
+
+                return new MultiRequirement<>(any, reqs);
 
             } else {
 
-                return new Requirement<>(registry.get(section.get("type", Identifier.class)), section.getString("value"));
-
+                RequirementType<T> type = registry.nameSerializer().deserialize(section.getString("type"));
+                return new Requirement<>(type, section.getString("value"));
             }
         }
 
