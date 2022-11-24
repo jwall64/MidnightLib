@@ -1,6 +1,5 @@
 package dev.jwall64.midnightlib.registry;
 
-import dev.jwall64.midnightlib.config.ConfigSection;
 import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
 
 import java.util.ArrayList;
