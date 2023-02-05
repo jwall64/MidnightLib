@@ -1,14 +1,10 @@
 package dev.jwall64.midnightlib.requirement;
 
-import dev.jwall64.midnightlib.config.ConfigSection;
-import dev.jwall64.midnightlib.config.serialization.ConfigSerializer;
-import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
-import dev.jwall64.midnightlib.registry.Identifier;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.serializer.ObjectSerializer;
+import dev.jwall64.mdcfg.serializer.SerializeContext;
+import dev.jwall64.mdcfg.serializer.SerializeResult;
+import dev.jwall64.mdcfg.serializer.Serializer;
 import dev.jwall64.midnightlib.registry.RegistryBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Requirement<T> {
 
@@ -32,43 +28,38 @@ public class Requirement<T> {
         return value;
     }
 
-    public static class RequirementSerializer<T> implements ConfigSerializer<Requirement<T>> {
+    public static <T> Serializer<Requirement<T>> simpleSerializer(RegistryBase<?, RequirementType<T>> registry) {
+        return ObjectSerializer.create(
+                registry.nameSerializer().entry("type", Requirement<T>::getType),
+                Serializer.STRING.entry("value", Requirement<T>::getValue),
+                Requirement<T>::new
+        );
+    }
 
-        private final RegistryBase<?, RequirementType<T>> registry;
+    public static <T> Serializer<Requirement<T>> serializer(RegistryBase<?, RequirementType<T>> registry) {
 
-        public RequirementSerializer(RegistryBase<?, RequirementType<T>> registry) {
-            this.registry = registry;
-        }
+        return new Serializer<>() {
+            @Override
+            public <O> SerializeResult<O> serialize(SerializeContext<O> context, Requirement<T> value) {
 
-        @Override
-        public Requirement<T> deserialize(ConfigSection section) {
-
-            if(section.has("values", List.class)) {
-
-                boolean any = section.has("any", Boolean.class) && section.getBoolean("any");
-
-                List<Requirement<T>> reqs = new ArrayList<>();
-                for(ConfigSection sec : section.getListFiltered("values", ConfigSection.class)) {
-                    reqs.add(deserialize(sec));
+                if(value instanceof MultiRequirement) {
+                    return MultiRequirement.multiSerializer(registry).serialize(context, (MultiRequirement<T>) value);
                 }
 
-                return new MultiRequirement<>(any, reqs);
-
-            } else {
-
-                RequirementType<T> type = registry.nameSerializer().deserialize(section.getString("type"));
-                return new Requirement<>(type, section.getString("value"));
+                return simpleSerializer(registry).serialize(context, value);
             }
-        }
 
-        @Override
-        public ConfigSection serialize(Requirement<T> object) {
+            @Override
+            public <O> SerializeResult<Requirement<T>> deserialize(SerializeContext<O> context, O value) {
 
-            if(object instanceof MultiRequirement) return MultiRequirement.serialize((MultiRequirement<?>) object);
+                O values = context.get("values", value);
+                if(values != null && context.isList(values)) {
+                    return MultiRequirement.multiSerializer(registry).deserialize(context, value).flatMap(req -> req);
+                }
 
-            return new ConfigSection().with("type", object.type).with("value", object.value);
-
-        }
+                return simpleSerializer(registry).deserialize(context, value);
+            }
+        };
     }
 
 }

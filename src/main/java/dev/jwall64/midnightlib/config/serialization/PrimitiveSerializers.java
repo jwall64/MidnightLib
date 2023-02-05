@@ -1,9 +1,8 @@
 package dev.jwall64.midnightlib.config.serialization;
 
-import java.util.Collection;
-import java.util.Objects;
 import java.util.function.Function;
 
+@Deprecated
 public class PrimitiveSerializers {
 
     public static final InlineSerializer<String> STRING = InlineSerializer.RAW;

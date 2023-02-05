@@ -1,6 +1,9 @@
 package dev.jwall64.midnightlib.requirement;
 
-import dev.jwall64.midnightlib.config.ConfigSection;
+
+import dev.jwall64.mdcfg.serializer.ObjectSerializer;
+import dev.jwall64.mdcfg.serializer.Serializer;
+import dev.jwall64.midnightlib.registry.RegistryBase;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,9 +30,22 @@ public class MultiRequirement<T> extends Requirement<T> {
         return false;
     }
 
-    static ConfigSection serialize(MultiRequirement<?> req) {
+    public boolean allowAny() {
+        return any;
+    }
 
-        return new ConfigSection().with("any", req.any).with("values", req.requirements);
+    public List<Requirement<T>> getRequirements() {
+        return requirements;
+    }
+
+    public static <T> Serializer<MultiRequirement<T>> multiSerializer(RegistryBase<?, RequirementType<T>> registry) {
+
+        return ObjectSerializer.create(
+                Serializer.BOOLEAN.entry("any", req -> req.any),
+                Requirement.serializer(registry).listOf().entry("values", req -> req.requirements),
+                MultiRequirement::new
+        );
+
     }
 
 }

@@ -2,6 +2,7 @@ package dev.jwall64.midnightlib.config.serialization;
 
 import java.util.function.Function;
 
+@Deprecated
 public interface Serializer<T, O>  {
 
     O serialize(T value);

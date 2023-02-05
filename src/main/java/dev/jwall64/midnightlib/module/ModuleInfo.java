@@ -1,6 +1,6 @@
 package dev.jwall64.midnightlib.module;
 
-import dev.jwall64.midnightlib.config.ConfigSection;
+import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.midnightlib.registry.Identifier;
 
 import java.util.ArrayList;

@@ -3,6 +3,7 @@ package dev.jwall64.midnightlib.config.serialization;
 import java.util.Objects;
 import java.util.function.Function;
 
+@Deprecated
 public class BooleanSerializer implements Serializer<Boolean, Object> {
 
     private final BooleanSerializerType type;
