@@ -1,6 +1,7 @@
 package dev.jwall64.midnightlib.math;
 
-import dev.jwall64.midnightlib.config.serialization.InlineSerializer;
+import dev.jwall64.mdcfg.serializer.ObjectSerializer;
+import dev.jwall64.mdcfg.serializer.Serializer;
 
 public class Vec2d {
     private final double[] data;
@@ -78,39 +79,12 @@ public class Vec2d {
         return new Vec2d(data[0] * i.data[0], data[1] * i.data[1]);
     }
 
-
-    public static final InlineSerializer<Vec2d> SERIALIZER = new InlineSerializer<Vec2d>() {
-        @Override
-        public Vec2d deserialize(String s) {
-            return parse(s);
-        }
-
-        @Override
-        public String serialize(Vec2d object) {
-            return object.toString();
-        }
-
-        @Override
-        public boolean canDeserialize(String s) {
-            if(s != null && s.contains(",")) {
-
-                String[] ss = s.split(",");
-                if(ss.length < 2) return false;
-
-                try {
-                    for(int i = 0 ; i < 2 ; i++) {
-                        Double.parseDouble(ss[i]);
-                    }
-
-                } catch (NumberFormatException ex) {
-                    return false;
-                }
-                return true;
-            }
-            return false;
-        }
-    };
-
+    public static final Serializer<Vec2d> SERIALIZER = dev.jwall64.mdcfg.serializer.InlineSerializer.of(Object::toString, Vec2d::parse).or(
+        ObjectSerializer.create(
+            Serializer.DOUBLE.entry("x", Vec2d::getX),
+            Serializer.DOUBLE.entry("y", Vec2d::getY),
+            Vec2d::new
+        ));
 
 }
 

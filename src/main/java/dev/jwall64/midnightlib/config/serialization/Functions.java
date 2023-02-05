@@ -1,5 +1,6 @@
 package dev.jwall64.midnightlib.config.serialization;
 
+@Deprecated
 public class Functions {
 
 

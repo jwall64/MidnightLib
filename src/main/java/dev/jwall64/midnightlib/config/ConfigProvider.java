@@ -3,6 +3,7 @@ package dev.jwall64.midnightlib.config;
 import java.io.File;
 import java.io.InputStream;
 
+@Deprecated
 public interface ConfigProvider {
 
     ConfigSection loadFromFile(File file);
