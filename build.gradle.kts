@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.jwall64"
-version = "1.0.0"
+version = "1.1.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
