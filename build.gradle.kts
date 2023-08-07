@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.jwall64"
-version = "1.2.0"
+version = "1.2.1-SNAPSHOT"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
@@ -23,8 +23,8 @@ repositories {
 dependencies {
 
     api("dev.jwall64:midnightcfg:1.0.1")
+    compileOnly("org.jetbrains:annotations:24.0.1")
 
-    implementation("org.jetbrains:annotations:24.0.1")
     implementation("org.slf4j:slf4j-api:2.0.7")
 
     testImplementation(platform(libs.junit.bom))
