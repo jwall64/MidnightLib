@@ -1,5 +1,6 @@
 package dev.jwall64.midnightlib.math;
 
+import org.jetbrains.annotations.Nullable;
 import dev.jwall64.mdcfg.serializer.ObjectSerializer;
 import dev.jwall64.mdcfg.serializer.Serializer;
 
@@ -155,6 +156,7 @@ public class Vec2d {
      * @param str The string to parse
      * @return A parsed vector, or null if the String is not formatted correctly
      */
+    @Nullable
     public static Vec2d parse(String str) {
 
         if(str == null || !str.contains(",")) return null;

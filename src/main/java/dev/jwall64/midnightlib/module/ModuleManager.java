@@ -1,5 +1,6 @@
 package dev.jwall64.midnightlib.module;
 
+import org.jetbrains.annotations.Nullable;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.midnightlib.event.Event;
 import dev.jwall64.midnightlib.event.HandlerList;
@@ -154,6 +155,7 @@ public class ModuleManager<T, M extends Module<T>> {
      * @return A module of that class, or null if none is found
      * @param <O> The type of module to lookup
      */
+    @Nullable
     public <O extends M> O getModule(Class<O> clazz) {
 
         Identifier id = getModuleId(clazz);
@@ -165,6 +167,7 @@ public class ModuleManager<T, M extends Module<T>> {
      * @param id The ID to lookup
      * @return A module with that ID, or null if none is found
      */
+    @Nullable
     public M getModuleById(Identifier id) {
 
         return loaded.get(id);
@@ -249,6 +252,7 @@ public class ModuleManager<T, M extends Module<T>> {
      * @return The ID of the loaded module of that class, or null of none is found
      * @param <O> The type of module
      */
+    @Nullable
     public <O extends M> Identifier getModuleId(Class<O> clazz) {
 
         return idsByClass.computeIfAbsent(clazz, k -> {
