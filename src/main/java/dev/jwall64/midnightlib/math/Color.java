@@ -4,6 +4,8 @@ import dev.jwall64.mdcfg.serializer.InlineSerializer;
 import dev.jwall64.mdcfg.serializer.ObjectSerializer;
 import dev.jwall64.mdcfg.serializer.Serializer;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public class Color {
 
@@ -130,6 +132,11 @@ public class Color {
         Color c = (Color) obj;
 
         return c.red == red && c.green == green && c.blue == blue;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(red, green, blue);
     }
 
     public double getDistanceTo(Color c) {
