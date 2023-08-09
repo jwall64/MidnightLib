@@ -2,10 +2,23 @@ package dev.jwall64.midnightlib.module;
 
 import dev.jwall64.mdcfg.ConfigSection;
 
+/**
+ * An interface for a module loaded by a module manager
+ * @param <T> The type of data to pass in during module initialization
+ */
 public interface Module<T> {
 
-    boolean initialize(ConfigSection section, T data);
+    /**
+     * Initializes a modules according to the given config and data
+     * @param config The module configuration
+     * @param data The data
+     * @return Whether initialization was successful
+     */
+    boolean initialize(ConfigSection config, T data);
 
+    /**
+     * Called when a module is disabled
+     */
     default void disable() { }
 
 }
