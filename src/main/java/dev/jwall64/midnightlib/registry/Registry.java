@@ -2,6 +2,8 @@ package dev.jwall64.midnightlib.registry;
 
 import dev.jwall64.mdcfg.serializer.InlineSerializer;
 
+import java.util.Optional;
+
 /**
  * A registry for storing values associated with Identifier keys
  * @param <T> The type of data stored in the registry
@@ -47,7 +49,7 @@ public class Registry<T> extends RegistryBase<Identifier, T> {
      * @return A new name serializer
      */
     public InlineSerializer<T> nameSerializer(InlineSerializer<Identifier> idSerializer) {
-        return InlineSerializer.of(val -> getId(val).toString(), id -> get(idSerializer.readString(id)));
+        return InlineSerializer.of(val -> Optional.ofNullable(getId(val)).map(Object::toString).orElse(null), id -> get(idSerializer.readString(id)));
     }
 
 }
