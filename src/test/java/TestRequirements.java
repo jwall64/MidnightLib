@@ -6,6 +6,7 @@ import dev.jwall64.midnightlib.requirement.MultiRequirement;
 import dev.jwall64.midnightlib.requirement.Requirement;
 import dev.jwall64.midnightlib.requirement.RequirementType;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TestRequirements {
@@ -70,7 +71,7 @@ public class TestRequirements {
     private static List<Requirement<String>> getRequirements() {
         MustEqual mst = new MustEqual();
 
-        return List.of(
+        return Arrays.asList(
                 new Requirement<>(mst, new ConfigPrimitive("Hello")),
                 new Requirement<>(mst, new ConfigPrimitive("Hello2")),
                 new Requirement<>(mst, new ConfigPrimitive("Hello")),

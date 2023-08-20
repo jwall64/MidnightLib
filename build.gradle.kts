@@ -1,17 +1,27 @@
-import java.net.URI
-
 plugins {
     id("java")
     id("java-library")
     id("maven-publish")
+    id("dev.jwall64.gradle-multi-version") version "0.2.1-SNAPSHOT"
+    id("dev.jwall64.gradle-patch") version "0.1.1-SNAPSHOT"
 }
 
 group = "dev.jwall64"
 version = "1.3.1-SNAPSHOT"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
     withSourcesJar()
+}
+
+multiVersion {
+    defaultVersion(17)
+    additionalVersions(11, 8)
+}
+
+patch {
+    patchSet("java8", sourceSets["main"], sourceSets["main"].java, multiVersion.getCompileTask(8))
+    patchSet("java11", sourceSets["main"], sourceSets["main"].java, multiVersion.getCompileTask(11))
 }
 
 repositories {
