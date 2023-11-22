@@ -1,6 +1,7 @@
 package dev.jwall64.midnightlib.module;
 
 import org.jetbrains.annotations.Nullable;
+import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
@@ -69,7 +70,7 @@ public class ModuleManager<T, M extends Module<T>> {
 
             if(!config.hasSection(key)) continue;
 
-            SerializeResult<ModuleInfo<T, M>> res = registry.nameSerializer().deserialize(ConfigContext.INSTANCE, config.get(key));
+            SerializeResult<ModuleInfo<T, M>> res = registry.nameSerializer().deserialize(ConfigContext.INSTANCE, new ConfigPrimitive(key));
             if(!res.isComplete()) {
                 LOGGER.warn("Unknown module: " + key + " requested. Skipping...");
                 continue;
