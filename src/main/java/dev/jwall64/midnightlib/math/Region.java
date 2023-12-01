@@ -5,6 +5,9 @@ import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
 import dev.jwall64.mdcfg.serializer.Serializer;
 
+/**
+ * An interface representing a region in 3D space
+ */
 public interface Region {
 
     /**
@@ -22,6 +25,8 @@ public interface Region {
     default boolean isWithin(Vec3i vector) {
         return isWithin(new Vec3d(vector.getX(), vector.getY(), vector.getZ()));
     }
+
+    CuboidRegion getBoundingBox();
 
     <T> SerializeResult<T> serialize(SerializeContext<T> context);
 
