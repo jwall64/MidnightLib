@@ -1,5 +1,6 @@
 package dev.jwall64.midnightlib.requirement;
 
+import dev.jwall64.mdcfg.Functions;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
 import dev.jwall64.mdcfg.serializer.SerializeResult;
 
@@ -9,10 +10,14 @@ import java.util.function.Function;
 public class BooleanRequirement<T> extends Requirement<T> {
 
     public static <T> RequirementType<T> type(Function<T, Boolean> getter) {
+        return type(getter, BooleanRequirement::new);
+    }
+
+    public static <T> RequirementType<T> type(Function<T, Boolean> getter, Functions.F3<RequirementType<T>, Function<T, Boolean>, Boolean, Requirement<T>> builder) {
         return new RequirementType<>() {
             @Override
             public <C> SerializeResult<Requirement<T>> create(SerializeContext<C> ctx, C value) {
-                return SerializeResult.ofNullable(ctx.asBoolean(value), "Expected a Boolean!").flatMap(b -> new BooleanRequirement<>(this, getter, b));
+                return SerializeResult.ofNullable(ctx.asBoolean(value), "Expected a Boolean!").flatMap(b -> builder.apply(this, getter, b));
             }
         };
     }
