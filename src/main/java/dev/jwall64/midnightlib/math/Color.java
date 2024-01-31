@@ -1,7 +1,9 @@
 package dev.jwall64.midnightlib.math;
 
 import org.jetbrains.annotations.Nullable;
-import dev.jwall64.mdcfg.serializer.*;
+import dev.jwall64.mdcfg.serializer.SerializeContext;
+import dev.jwall64.mdcfg.serializer.SerializeResult;
+import dev.jwall64.mdcfg.serializer.Serializer;
 
 import java.util.Objects;
 
