@@ -1,6 +1,8 @@
 package dev.jwall64.midnightlib.module;
 
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
@@ -9,9 +11,6 @@ import dev.jwall64.midnightlib.event.Event;
 import dev.jwall64.midnightlib.event.HandlerList;
 import dev.jwall64.midnightlib.registry.Identifier;
 import dev.jwall64.midnightlib.registry.Registry;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import dev.jwall64.midnightlib.registry.RegistryBase;
 
 import java.util.*;
