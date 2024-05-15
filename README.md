@@ -6,11 +6,11 @@ A general use Java library including Modules, Events, Registries, and some basic
 Add the following to your `build.gradle.kts` file:
 ```
 repositories {
-    maven("https://maven.jwall64.dev/")
+    maven("https://maven.jwall64.dev/releases")
 }
 
 dependencies {
-    compileOnly("dev.jwall64:MidnightLib:1.5.0-SNAPSHOT")
+    compileOnly("dev.jwall64:MidnightLib:1.6.0")
 }
 ```
 
