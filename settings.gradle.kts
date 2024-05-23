@@ -1,10 +1,10 @@
-rootProject.name = "midnightlib"
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        mavenLocal()
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.jwall64.dev/plugins")
     }
-
     includeBuild("gradle/plugins")
 }
+
+rootProject.name = "midnightlib"
