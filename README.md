@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("dev.jwall64:MidnightLib:1.6.0")
+    compileOnly("dev.jwall64:MidnightLib:1.6.1")
 }
 ```
 
