@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import dev.jwall64.mdcfg.ConfigPrimitive;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.InlineSerializer;
+import dev.jwall64.mdcfg.serializer.SerializeResult;
+import dev.jwall64.mdcfg.serializer.Serializer;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -341,16 +343,14 @@ public class Registry<I, T> implements Iterable<T> {
     public InlineSerializer<T> byIdSerializer() {
         return new InlineSerializer<T>() {
             @Override
-            public T readString(String s) {
-                I id = idSerializer.readString(s);
-                if(id == null) return null;
-                return get(idSerializer.readString(s));
+            public SerializeResult<T> readString(String s) {
+                return idSerializer.readString(s).flatMap(Registry.this::get);
             }
 
             @Override
-            public String writeString(T t) {
+            public SerializeResult<String> writeString(T t) {
                 I id = getId(t);
-                if(id == null) return null;
+                if(id == null) return SerializeResult.failure("Unable to serialize unregistered value!");
                 return idSerializer.writeString(getId(t));
             }
         };
