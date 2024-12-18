@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.mdcfg.serializer.ConfigContext;
 import dev.jwall64.mdcfg.serializer.SerializeContext;
@@ -121,7 +122,8 @@ public class TestRequirements {
         Assertions.assertTrue(req.check("Hello1"));
         Assertions.assertTrue(req.isInverted());
 
-        Assertions.assertEquals(serialized, ser.serialize(ConfigContext.INSTANCE, req).getOrThrow());
+        ConfigObject reserialized = ser.serialize(ConfigContext.INSTANCE, req).getOrThrow();
+        Assertions.assertEquals(serialized, reserialized);
 
     }
 
