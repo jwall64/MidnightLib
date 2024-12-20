@@ -1,10 +1,12 @@
 package dev.jwall64.midnightlib.requirement;
 
-import dev.jwall64.mdcfg.serializer.SerializeContext;
-import dev.jwall64.mdcfg.serializer.SerializeResult;
+import dev.jwall64.mdcfg.serializer.Serializer;
+import dev.jwall64.mdcfg.TypeReference;
 
-public interface CheckType<T> {
+public interface CheckType<T, C extends Check<T>> {
 
-    <O> SerializeResult<Check<T>> deserialize(SerializeContext<O> context, O value);
+    TypeReference<C> type();
+
+    Serializer<C> serializer();
 
 }
