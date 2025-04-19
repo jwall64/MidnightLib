@@ -10,16 +10,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("dev.jwall64:MidnightLib:2.0.0")
+    compileOnly("dev.jwall64:midnightlib:2.2.1")
 }
 ```
 
 ## Features
-### Registries
-- A registry is a data type which contains key-value pairs
-- 
-- Registries can be frozen using `RegistryBase::freeze()`, preventing them from being modified
-- Registries can be configured to prevent the same value from being registered twice
 
 ### Modules
 - MidnightLib has a system which allows you to create configurable modules which can be enabled or disabled at runtime.
