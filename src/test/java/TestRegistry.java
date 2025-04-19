@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import dev.jwall64.mdcfg.serializer.InlineSerializer;
-import dev.jwall64.midnightlib.registry.DefaultedRegistry;
-import dev.jwall64.midnightlib.registry.Identifier;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.registry.DefaultedRegistry;
+import dev.jwall64.mdcfg.registry.Identifier;
+import dev.jwall64.mdcfg.registry.Registry;
 
 import java.util.Objects;
 

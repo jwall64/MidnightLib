@@ -3,7 +3,7 @@ package dev.jwall64.midnightlib.module;
 import org.jetbrains.annotations.Nullable;
 import dev.jwall64.mdcfg.ConfigObject;
 import dev.jwall64.mdcfg.ConfigSection;
-import dev.jwall64.midnightlib.registry.Identifier;
+import dev.jwall64.mdcfg.registry.Identifier;
 
 public interface ModuleConfigProvider {
 

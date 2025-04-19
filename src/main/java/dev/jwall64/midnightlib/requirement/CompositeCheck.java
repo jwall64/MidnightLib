@@ -1,9 +1,8 @@
 package dev.jwall64.midnightlib.requirement;
 
-import dev.jwall64.mdcfg.TypeReference;
 import dev.jwall64.mdcfg.serializer.*;
+import dev.jwall64.mdcfg.registry.Registry;
 import dev.jwall64.midnightlib.math.Range;
-import dev.jwall64.midnightlib.registry.Registry;
 
 import java.util.Collection;
 

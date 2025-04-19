@@ -4,8 +4,8 @@ import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.midnightlib.module.Module;
 import dev.jwall64.midnightlib.module.ModuleInfo;
 import dev.jwall64.midnightlib.module.ModuleManager;
-import dev.jwall64.midnightlib.registry.Identifier;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.registry.Identifier;
+import dev.jwall64.mdcfg.registry.Registry;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
