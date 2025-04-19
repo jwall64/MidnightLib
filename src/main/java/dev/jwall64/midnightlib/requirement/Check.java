@@ -1,7 +1,7 @@
 package dev.jwall64.midnightlib.requirement;
 
 import dev.jwall64.mdcfg.serializer.Serializer;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.registry.Registry;
 
 public interface Check<T> {
 

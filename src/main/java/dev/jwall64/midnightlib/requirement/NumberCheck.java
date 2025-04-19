@@ -1,6 +1,5 @@
 package dev.jwall64.midnightlib.requirement;
 
-import dev.jwall64.mdcfg.TypeReference;
 import dev.jwall64.mdcfg.serializer.Serializer;
 import dev.jwall64.midnightlib.math.Range;
 

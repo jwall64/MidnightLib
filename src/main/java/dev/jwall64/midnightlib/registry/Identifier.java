@@ -6,6 +6,7 @@ import dev.jwall64.mdcfg.serializer.InlineSerializer;
 /**
  * An identifier consisting of a namespace and a path
  */
+@Deprecated
 @SuppressWarnings("unused")
 public class Identifier {
 

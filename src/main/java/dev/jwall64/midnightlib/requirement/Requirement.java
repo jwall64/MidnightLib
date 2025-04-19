@@ -2,7 +2,7 @@ package dev.jwall64.midnightlib.requirement;
 
 import dev.jwall64.mdcfg.serializer.ObjectSerializer;
 import dev.jwall64.mdcfg.serializer.Serializer;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.registry.Registry;
 
 import java.util.function.BiFunction;
 

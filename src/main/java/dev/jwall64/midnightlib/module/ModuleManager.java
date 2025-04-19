@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import dev.jwall64.mdcfg.ConfigSection;
 import dev.jwall64.midnightlib.event.Event;
 import dev.jwall64.midnightlib.event.HandlerList;
-import dev.jwall64.midnightlib.registry.Identifier;
-import dev.jwall64.midnightlib.registry.Registry;
+import dev.jwall64.mdcfg.registry.Identifier;
+import dev.jwall64.mdcfg.registry.Registry;
 
 import java.util.*;
 
