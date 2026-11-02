@@ -15,7 +15,7 @@ publishing {
 
     if (project.hasProperty("pubUrl")) {
 
-        var url: String = project.properties["pubUrl"] as String
+        var url: String = project.findProperty("pubUrl") as String
         url += if((version as String).endsWith("-SNAPSHOT")) {
             "snapshots"
         } else {

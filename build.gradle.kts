@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
 
-    api("dev.jwall64:midnightcfg-api:3.3.0")
+    api("dev.jwall64:midnightcfg-api:3.5.6")
     compileOnly("org.jetbrains:annotations:24.1.0")
 
     implementation("org.slf4j:slf4j-api:2.0.16")
